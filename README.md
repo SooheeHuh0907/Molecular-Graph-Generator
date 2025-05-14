@@ -1,9 +1,13 @@
 # Molecular Graph Generator
 
 generate_graphs.py # Parses .xyz files and generates molecular graphs
+
 visualize_graph.py # Visualizes molecular graph structures (2D)
+
 visualize_3D.py # Visualizes molecular structures in 3D space
+
 graph_data.pkl # (Generated) Graph representations of molecules
+
 structure_data.pkl # (Generated) Atom types and 3D coordinates
 
 ## Requirements
