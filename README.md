@@ -54,3 +54,6 @@ Render molecules in 3D space with atoms, bonds, and bond lengths.
 Option 1: visualize a single molecule
 
 Option 2: visualize all molecules sequentially
+
+# License
+MIT License
