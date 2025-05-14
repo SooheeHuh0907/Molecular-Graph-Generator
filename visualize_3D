@@ -1,0 +1,57 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pickle
+
+def visualize_3d_molecule(atoms, coordinates, graph_data):
+    """
+    Visualize a molecule in 3D with bond lengths displayed.
+    """
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    # Plot atoms
+    for i, (atom, coord) in enumerate(zip(atoms, coordinates)):
+        ax.scatter(coord[0], coord[1], coord[2], label=atom)
+    
+    # Plot bonds and bond lengths
+    for i, j in graph_data.edge_index.t().numpy():
+        coord_i = coordinates[i]
+        coord_j = coordinates[j]
+        ax.plot([coord_i[0], coord_j[0]], [coord_i[1], coord_j[1]], [coord_i[2], coord_j[2]], color='gray')
+
+        # Calculate bond length and annotate
+        bond_length = np.linalg.norm(coord_i - coord_j)
+        mid_point = (coord_i + coord_j) / 2
+        ax.text(mid_point[0], mid_point[1], mid_point[2], f"{bond_length:.2f}", color='red')
+
+    # Add labels for atoms at the coordinates
+    for i, (atom, coord) in enumerate(zip(atoms, coordinates)):
+        ax.text(coord[0], coord[1], coord[2], atom, color='blue', fontsize=12)
+
+    plt.show()
+
+# Load graph data
+with open("graph_data.pkl", "rb") as f:
+    graph_data_list = pickle.load(f)
+
+# Load molecular structure data
+with open("structure_data.pkl", "rb") as f:
+    structures = pickle.load(f)
+
+# Ask the user what they want to do
+choice = input("Enter '1' to visualize a single molecule in 3D, '2' to visualize all molecules in 3D: ")
+
+if choice == '1':
+    index = int(input("Enter the index of the molecule you want to visualize: "))
+    atoms, coordinates = structures[index]  # Extract the atoms and coordinates for this structure
+    graph_data = graph_data_list[index]  # Extract the graph data for this structure
+    visualize_3d_molecule(atoms, coordinates, graph_data)
+
+elif choice == '2':
+    for i, graph_data in enumerate(graph_data_list):
+        atoms, coordinates = structures[i]
+        print(f"Visualizing molecule {i + 1}...")
+        visualize_3d_molecule(atoms, coordinates, graph_data)
+
+else:
+    print("Invalid choice.")
