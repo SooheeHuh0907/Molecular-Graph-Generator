@@ -40,12 +40,13 @@ The parser handles minor formatting issues in .xyz files
 Display molecular graphs with node/edge structure using NetworkX.
 
 Option 1: visualize a single graph
+
 Option 2: visualize all graphs in the dataset
 
-Render molecules in 3D space with atoms, bonds, and bond lengths.
 
 # visualize_3D.py
 Render molecules in 3D space with atoms, bonds, and bond lengths.
 
 Option 1: visualize a single molecule
+
 Option 2: visualize all molecules sequentially
